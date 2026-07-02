@@ -32,3 +32,26 @@ npm test
 3. 雛形部分（CI/CD・Issue/PR テンプレート・Dependabot 設定）はそのまま利用する
 4. GitHub の「Actions」タブから `Sync Labels` ワークフローを手動実行（Run workflow）し、`labels.json` に定義されたラベルを反映する
    - 以後は `labels.json` を編集して `main` に push すると自動で同期される
+
+## ブランチ保護ルールの設定
+このテンプレートから作成したリポジトリでは、CI/CD やレビューを確実に機能させるため、`main` ブランチに保護ルールを設定することを推奨します。
+
+Template repository は Branch protection rules をコピーしないため、新規プロジェクトを作るたびに以下の手動設定が必要です。
+
+1. リポジトリの **Settings** → **Branches** を開く
+2. **Add branch protection rule** をクリック
+3. Branch name pattern に `main` を入力
+4. 以下の項目にチェック
+   - Require a pull request before merging
+   - Require approvals（1名以上）
+   - Require status checks to pass before merging（`ci.yml` のチェックを指定。事前に一度 CI を実行しておく必要があります）
+   - Do not allow bypassing the above settings
+5. **Create** をクリックして保存
+
+### （参考）GitHub CLI で設定する場合
+```bash
+gh api --method PUT /repos/{owner}/{repo}/branches/main/protection \
+  -f "required_pull_request_reviews[required_approving_review_count]=1" \
+  -F "enforce_admins=true" \
+  -f "restrictions=null"
+```

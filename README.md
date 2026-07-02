@@ -26,7 +26,7 @@ npm test
 - `.github/pull_request_template.md` — PR テンプレート
 - `labels.json` — プロジェクト共通のラベル定義（種別・PR・Issue・タスク分解・コメント・ステータスの6カテゴリ）
 
-## 使い方<a id="HowToUse"></a>
+## 使い方
 1. このリポジトリを新規プロジェクトの雛形として使用する
 2. `sum.js` / `sum.test.js` などのサンプルコードを実際の実装・テストに置き換える
 3. 雛形部分（CI/CD・Issue/PR テンプレート・Dependabot 設定）はそのまま利用する
@@ -60,7 +60,7 @@ labels-config sync --owner {owner} --repo {repo} --file labels.json --delete-ext
 `--owner`・`--repo`を毎回指定するのが面倒な場合は、記事内で紹介されているシェル関数（`labels-sync`）を導入すると、現在のディレクトリから自動でリポジトリ情報を取得してくれます。詳しくは[記事](https://zenn.dev/ait/articles/zenn-labels-config-guide) を参照してください。
 
 ### GitHub Actionsで自動化する場合
-本テンプレートには `.github/workflows/sync-labels.yml` を同梱済みです。`labels.json` を編集して `main` に push するだけで、GitHub Actions が自動でラベルを同期します。初回のみ、Actionsタブから `Sync Labels` を手動実行してください（詳細は「[使い方](#HowToUse)」参照）。
+本テンプレートには `.github/workflows/sync-labels.yml` を同梱済みです。`labels.json` を編集して `main` に push するだけで、GitHub Actions が自動でラベルを同期します。初回のみ、Actionsタブから `Sync Labels` を手動実行してください（詳細は「[使い方](#使い方)」参照）。
 
 ## ブランチ保護ルールの設定
 このテンプレートから作成したリポジトリでは、CI/CD やレビューを確実に機能させるため、`main` ブランチに保護ルールを設定することを推奨します。
